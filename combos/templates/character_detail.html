@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Combo Builder Prototype: {{ character.name }}{% endblock %}
+
+{% block content %}
+    this is the page for {{ character.name }} combos.
+
+    {% if combos %}
+    <ul>
+        {% for combo in combos %}
+            <li><a href="{% url 'combo_display' combo.pk %}">{{ combo }}</a></li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+{% endblock content %}
+
+{% block extra-js %}
+
+{% endblock extra-js %}

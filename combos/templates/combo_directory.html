@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Combo Builder Prototype{% endblock %}
+
+{% block content %}
+<ul>
+    {% for game in games %}
+        <li>
+            {{ game.name }}
+            <ul>
+            {% for character in characters %}
+                {% if character.game == game %}
+                    <li>{{ character.name }}</li>
+                {% endif %}
+            {% endfor %}
+            </ul>
+        </li>
+    {% endfor %}
+</ul>
+{% endblock content %}
+
+{% block extra-js %}
+
+{% endblock extra-js %}
