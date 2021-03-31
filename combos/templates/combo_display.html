@@ -7,11 +7,11 @@
 <div class="row">
     <div class="col-6">
         {% if inputs %}
-            <ol class='comboarea'>
+            <ul class='comboarea'>
                 {% for input in inputs %}
-                    <li class="alert alert-primary" data-id={{ input.id }}>{{ input.command.text }}</li>
+                    <li><button class="btn btn-success">{{ input.command.text }}</button></li>
                 {% endfor %}
-            </ol>
+            </ul>
         {% endif %}
     </div><!-- end active combo area -->
 
@@ -19,7 +19,7 @@
         {% if commands %}
             <ul class='commandarea'>
                 {% for command in commands %}
-                    <li><button class="btn btn-primary" command-id={{ command.id }}>{{ command.text }}</button></li>
+                    <li><button class="btn btn-primary command" command-id={{ command.id }}>{{ command.text }}</button></li>
                 {% endfor %}
             </ul>
         {% endif %}
@@ -51,7 +51,7 @@
     // Make our ordered list with a class of example sortable.
     // onDrop (reorder item) make a JSON representation of the list and POST
     // the JSON to the current page
-    var group = $("ol.comboarea").sortable({
+    var group = $("ul.comboarea").sortable({
         delay: 500,
         onDrop: function ($item, container, _super) {
             var data = group.sortable("serialize").get();
@@ -66,7 +66,7 @@
     });
 
     $(document).ready(function(){
-          $(".btn").on('click',function() {
+          $(".command").on('click',function() {
               // need to grab the data value of the specific btn clicked and
               // 1: add it to the combo via PUT
               // 2: add it to the ol.comboarea list at the end.
