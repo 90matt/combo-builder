@@ -1,6 +1,6 @@
 import json
 from django.shortcuts import render
-from django.http import JsonResponse, HttpResponse
+from django.http import JsonResponse, HttpResponse, HttpResponseServerError
 from django.views.generic.base import TemplateView
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
@@ -112,7 +112,7 @@ class ComboDetailView(DetailView):
         new_input.command = command
         new_input.order = input_location
         new_input.save()
-        
+
         return JsonResponse({"success": True}, status=200)
 
 

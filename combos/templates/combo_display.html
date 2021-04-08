@@ -3,19 +3,21 @@
 {% block title %}Combo Builder Prototype: {{ character.name }}{% endblock %}
 
 {% block content %}
-    this combo is for {{ combo.character.name }}.
+    this combo is for {{ combo.character.name }} in {{ combo.character.game.name }}.
 <div class="row">
     <div class="col-6">
+      <i>the inputs below can be reordered via drag and drop.</i>
         {% if inputs %}
             <ul class='comboarea'>
                 {% for input in inputs %}
-                    <li><button class="btn btn-success">{{ input.command.text }}</button></li>
+                    <li data-id={{ input.id }}><button class="btn btn-success">{{ input.command.text }}</button></li>
                 {% endfor %}
             </ul>
         {% endif %}
     </div><!-- end active combo area -->
 
     <div class="col-6">
+        <i>click the buttons below to add new inputs to the combo on the left.</i>
         {% if commands %}
             <ul class='commandarea'>
                 {% for command in commands %}
@@ -67,17 +69,15 @@
 
     $(document).ready(function(){
           $(".command").on('click',function() {
-              // need to grab the data value of the specific btn clicked and
-              // 1: add it to the combo via PUT
-              // 2: add it to the ol.comboarea list at the end.
               var jsonString = JSON.stringify( $(this).attr('command-id') );
               var url = $(this).attr('href');
-              alert( $(this).text());
               $.ajax({
                   type: "PUT",
                   data: jsonString,
                   url: url
               });
+              // TODO: I need a way to capture the new Input object and add it
+              // to the comboarea column.
           });
       });
     </script>
